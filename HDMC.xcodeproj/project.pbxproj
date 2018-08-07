@@ -61,7 +61,10 @@
 			children = (
 				956F8E0E2119C27000CBBBBD /* HDMC */,
 				956F8E232119C27100CBBBBD /* HDMCTests */,
+				956F8E312119C2FA00CBBBBD /* Models */,
 				956F8E0D2119C27000CBBBBD /* Products */,
+				956F8E2F2119C2EA00CBBBBD /* Protocols */,
+				956F8E302119C2F200CBBBBD /* Views */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,6 +97,27 @@
 				956F8E262119C27100CBBBBD /* Info.plist */,
 			);
 			path = HDMCTests;
+			sourceTree = "<group>";
+		};
+		956F8E2F2119C2EA00CBBBBD /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		956F8E302119C2F200CBBBBD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		956F8E312119C2FA00CBBBBD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,6 +385,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HR25439TCX;
 				INFOPLIST_FILE = HDMC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -379,6 +404,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HR25439TCX;
 				INFOPLIST_FILE = HDMC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
