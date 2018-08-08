@@ -20,9 +20,29 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <segue destination="itM-0w-XCT" kind="presentation" identifier="showQRCodeView" id="4V2-KX-pxc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="31" y="29"/>
+        </scene>
+        <!--Code View Controller-->
+        <scene sceneID="f52-rr-ViU">
+            <objects>
+                <viewController id="itM-0w-XCT" customClass="QRCodeViewController" customModule="HDMC" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="k7H-4D-DiZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="5ax-5g-hqW"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Occ-mn-W2k"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h4p-sS-EfU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="790" y="30"/>
         </scene>
     </scenes>
 </document>

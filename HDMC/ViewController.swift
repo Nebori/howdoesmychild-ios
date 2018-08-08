@@ -15,7 +15,7 @@ let CALL_APP_QRCODE             = "QRcode"
 // MARK: - Call script names
 let CALL_SCRIPT_QRCode          = "QRCode()"
 
-class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
+class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, QRCodeViewControllerDelegate {
     
     // UI Components (_Member Variable)
     // WKWebView before IOS 11.0 (NSCoding support was broken in previous versions)
@@ -47,11 +47,24 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKSc
 
         // 초기 url 삽입
         webView.load(URLRequest(url: URL(string: "https://google.com")!))
+        DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(3), execute: {
+            // 뷰를 너무 빨리 생성하면 윈도우가 순서가 어긋나서 상단에 뷰가 표시되지 않는다.
+            // 이런 문제를 해결하기 위해서 잠시 후 화면을 생성하도록 하자.
+            // 일반 로직에서는 문제가 되지 않지만 테스트에서는 이렇게 문제시 될 수 있음
+            self.performSegue(withIdentifier: "showQRCodeView", sender: self)
+        })
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showQRCodeView" {
+            let qrcodeViewController = segue.destination as! QRCodeViewController
+            qrcodeViewController.delegate = self
+        }
     }
 
     // MARK: - WKScriptMessageHandler
@@ -59,6 +72,11 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKSc
         if message.name == CALL_APP_QRCODE {
             // qrcode를 불렀을 때 동작
         }
+    }
+    
+    // MARK: - QRCodeViewControllerDelegate
+    func sendURL(url: URL) {
+        print(url)
     }
 
 }
