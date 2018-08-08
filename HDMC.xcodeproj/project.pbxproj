@@ -45,6 +45,7 @@
 		956F8E262119C27100CBBBBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		956F8E332119CE3200CBBBBD /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		95F2B1FF211A9EB500859F7C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Swift_Configure/HDMC/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		95F2B201211AA4F600859F7C /* HDMC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HDMC.entitlements; sourceTree = "<group>"; };
 		A1B95FEB1C1204DFD0121AB8 /* Pods-HDMCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HDMCTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HDMCTests/Pods-HDMCTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A6F72BE58D4DE42CA5C667C4 /* Pods_HDMCTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HDMCTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEA511BAEE1BFD923023568D /* Pods-HDMCTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HDMCTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HDMCTests/Pods-HDMCTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -107,6 +108,7 @@
 		956F8E0E2119C27000CBBBBD /* HDMC */ = {
 			isa = PBXGroup;
 			children = (
+				95F2B201211AA4F600859F7C /* HDMC.entitlements */,
 				95F2B1FF211A9EB500859F7C /* GoogleService-Info.plist */,
 				956F8E0F2119C27000CBBBBD /* AppDelegate.swift */,
 				956F8E112119C27000CBBBBD /* ViewController.swift */,
@@ -211,6 +213,11 @@
 				TargetAttributes = {
 					956F8E0B2119C27000CBBBBD = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					956F8E1F2119C27100CBBBBD = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -485,6 +492,7 @@
 			baseConfigurationReference = 80370C48A4C2EE52D38910C3 /* Pods-HDMC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HDMC/HDMC.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HR25439TCX;
 				INFOPLIST_FILE = HDMC/Info.plist;
@@ -505,6 +513,7 @@
 			baseConfigurationReference = 3C332FE9DBFF8E1DA15053AA /* Pods-HDMC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HDMC/HDMC.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HR25439TCX;
 				INFOPLIST_FILE = HDMC/Info.plist;
