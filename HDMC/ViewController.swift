@@ -10,10 +10,10 @@ import UIKit
 import WebKit
 
 // MARK: - Call app names
-let CALL_APP_QRCODE             = "QRcode"
+let CALL_APP_QRCODE             = "callQrcode"
 
 // MARK: - Call script names
-let CALL_SCRIPT_QRCode          = "QRCode()"
+let CALL_SCRIPT_QRCode          = "onQrcodeRead"
 
 class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, QRCodeViewControllerDelegate {
     
@@ -30,29 +30,45 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKSc
         
         // Initialize WKWebView
         configuration.userContentController = contentController
-        webView = WKWebView(frame: self.view.frame, configuration: configuration)
+        webView = WKWebView()
         webView.uiDelegate = self
         webView.navigationDelegate = self
+        webView.scrollView.isScrollEnabled = false
         
-        // JS -> Native Application
-        webView.configuration.userContentController.add(self, name: CALL_APP_QRCODE)
-        
-        // Native Application -> JS
-        webView.evaluateJavaScript(CALL_SCRIPT_QRCode) { (result, error) in
-            
-        }
-        
+        // Recognize Auto Layout
+        webView.translatesAutoresizingMaskIntoConstraints = false
+
         // Add subview
         self.view.addSubview(webView)
-
+        
+        // Add constraints
+        if #available(iOS 11.0, *) {
+            let safeArea = self.view.safeAreaLayoutGuide
+            webView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor).isActive = true
+            webView.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
+            webView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor).isActive = true
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        } else {
+            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            webView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
+            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        }
+        
+        // JS -> Native Application
+        webView.configuration.userContentController.add(self, name: "callQrcode")
+        
+        // TODO: Test용 나중에 지워야 함
+        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { (records) in
+            for record in records {
+                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {
+                    print("Cache clear success.")
+                })
+            }
+        }
+        
         // 초기 url 삽입
-        webView.load(URLRequest(url: URL(string: "https://google.com")!))
-        DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(3), execute: {
-            // 뷰를 너무 빨리 생성하면 윈도우가 순서가 어긋나서 상단에 뷰가 표시되지 않는다.
-            // 이런 문제를 해결하기 위해서 잠시 후 화면을 생성하도록 하자.
-            // 일반 로직에서는 문제가 되지 않지만 테스트에서는 이렇게 문제시 될 수 있음
-            self.performSegue(withIdentifier: "showQRCodeView", sender: self)
-        })
+        webView.load(URLRequest(url: URL(string: "https://howdoesmychild.firebaseapp.com")!))
     }
 
     override func didReceiveMemoryWarning() {
@@ -69,14 +85,16 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKSc
 
     // MARK: - WKScriptMessageHandler
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if message.name == CALL_APP_QRCODE {
-            // qrcode를 불렀을 때 동작
+        if message.name == "callQrcode" {
+            self.performSegue(withIdentifier: "showQRCodeView", sender: self)
         }
     }
     
     // MARK: - QRCodeViewControllerDelegate
     func sendURL(url: URL) {
-        print(url)
+        webView.evaluateJavaScript("\(CALL_SCRIPT_QRCode)('\(url.absoluteString)')") { (result, error) in
+            print(url.absoluteString)
+        }
     }
 
 }
