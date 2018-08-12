@@ -17,6 +17,7 @@
 		956F8E252119C27100CBBBBD /* HDMCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F8E242119C27100CBBBBD /* HDMCTests.swift */; };
 		956F8E342119CE3200CBBBBD /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F8E332119CE3200CBBBBD /* QRCodeViewController.swift */; };
 		95F2B200211A9EB500859F7C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95F2B1FF211A9EB500859F7C /* GoogleService-Info.plist */; };
+		95F2B2032120723300859F7C /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F2B2022120723300859F7C /* Thread.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		956F8E332119CE3200CBBBBD /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		95F2B1FF211A9EB500859F7C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Swift_Configure/HDMC/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		95F2B201211AA4F600859F7C /* HDMC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HDMC.entitlements; sourceTree = "<group>"; };
+		95F2B2022120723300859F7C /* Thread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		A1B95FEB1C1204DFD0121AB8 /* Pods-HDMCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HDMCTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HDMCTests/Pods-HDMCTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A6F72BE58D4DE42CA5C667C4 /* Pods_HDMCTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HDMCTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEA511BAEE1BFD923023568D /* Pods-HDMCTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HDMCTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HDMCTests/Pods-HDMCTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		956F8E2F2119C2EA00CBBBBD /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				95F2B2022120723300859F7C /* Thread.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				956F8E342119CE3200CBBBBD /* QRCodeViewController.swift in Sources */,
 				956F8E122119C27000CBBBBD /* ViewController.swift in Sources */,
 				956F8E102119C27000CBBBBD /* AppDelegate.swift in Sources */,
+				95F2B2032120723300859F7C /* Thread.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

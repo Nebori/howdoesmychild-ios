@@ -13,7 +13,7 @@ protocol QRCodeViewControllerDelegate {
     func sendURL(url: URL)
 }
 
-class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UsingThread {
     
     var captureSession:AVCaptureSession?
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
@@ -92,25 +92,27 @@ class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     
     // MARK: - AVCaptureMetadataOutputObjectsDelegate
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        if metadataObjects.count == 0 {
-            print("no objects returned")
-            return
-        }
-        
-        let metaDataObject = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
-        guard let StringCodeValue = metaDataObject.stringValue else {
-            return
-        }
-        
-        //transformedMetaDataObject returns layer coordinates/height/width from visual properties
-        guard let _ = videoPreviewLayer?.transformedMetadataObject(for: metaDataObject) else {
-            return
-        }
-        
-        AudioServicesPlayAlertSound(systemSoundId)
-        
-        if let url = URL(string: StringCodeValue) {
-            delegate?.sendURL(url: url)
+        syncThread {
+            if metadataObjects.count == 0 {
+                print("no objects returned")
+                return
+            }
+            
+            let metaDataObject = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+            guard let StringCodeValue = metaDataObject.stringValue else {
+                return
+            }
+            
+            //transformedMetaDataObject returns layer coordinates/height/width from visual properties
+            guard let _ = self.videoPreviewLayer?.transformedMetadataObject(for: metaDataObject) else {
+                return
+            }
+            
+            AudioServicesPlayAlertSound(self.systemSoundId)
+            
+            if let url = URL(string: StringCodeValue) {
+                self.delegate?.sendURL(url: url)
+            }
         }
     }
     
