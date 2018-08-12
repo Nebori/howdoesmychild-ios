@@ -7,6 +7,7 @@ target 'HDMC' do
 
   # Pods for HDMC
   pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
 
   target 'HDMCTests' do
     inherit! :search_paths
