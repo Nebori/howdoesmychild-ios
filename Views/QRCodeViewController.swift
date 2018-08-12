@@ -60,14 +60,34 @@ class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                 view.layer.addSublayer(videoPreviewLayer!)
             }
             catch {
-                print("Error")
+                print("CaptureSession Error")
             }
         }
+        
+        // Add button
+        let backButton: UIButton = UIButton(frame:
+            CGRect(
+                x: view.frame.width / 3,
+                y: view.frame.height - (view.frame.height / 8),
+                width: view.frame.width / 3,
+                height: 100)
+        )
+        backButton.addTarget(self, action: #selector(closeViewController), for: .touchUpInside)
+        backButton.setTitle("Finish", for: .normal)
+        view.addSubview(backButton)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - Selector Method
+    @objc
+    func closeViewController() {
+        dismiss(animated: true) {
+            self.captureSession?.stopRunning()
+        }
     }
     
     // MARK: - AVCaptureMetadataOutputObjectsDelegate
@@ -91,20 +111,7 @@ class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         
         if let url = URL(string: StringCodeValue) {
             delegate?.sendURL(url: url)
-            captureSession?.stopRunning()
-            self.dismiss(animated: true, completion: nil)
         }
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

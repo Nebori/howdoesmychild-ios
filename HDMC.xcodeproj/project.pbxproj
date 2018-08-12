@@ -90,8 +90,8 @@
 				956F8E312119C2FA00CBBBBD /* Models */,
 				956F8E0D2119C27000CBBBBD /* Products */,
 				956F8E2F2119C2EA00CBBBBD /* Protocols */,
-				956F8E302119C2F200CBBBBD /* Views */,
 				3D91573F552257FB4B5D3EC2 /* Pods */,
+				956F8E302119C2F200CBBBBD /* Views */,
 				B34CC53BA66B76DE2F8546EA /* Frameworks */,
 			);
 			sourceTree = "<group>";
