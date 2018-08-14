@@ -11,11 +11,12 @@ import Firebase
 import FirebaseMessaging
 import UserNotifications
 
+let APN_AUTH_KEY           = "62K7ZP6BTR"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -38,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         application.registerForRemoteNotifications()
+        
         return true
     }
 
@@ -78,7 +80,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         // Print message ID.
-        if let messageID = userInfo["62K7ZP6BTR"] {
+        if let messageID = userInfo[APN_AUTH_KEY] {
             print("Message ID: \(messageID)")
         }
 
@@ -94,7 +96,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
         // Print message ID.
-        if let messageID = userInfo["62K7ZP6BTR"] {
+        if let messageID = userInfo[APN_AUTH_KEY] {
             print("Message ID: \(messageID)")
         }
 
@@ -110,9 +112,10 @@ extension AppDelegate : MessagingDelegate {
     // [START refresh_token]
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("Firebase registration token: \(fcmToken)")
-        
         // TODO: If necessary send token to application server.
         // Note: This callback is fired at each app startup and whenever a new token is generated.
+        let store: HDMCStore = HDMCStore.sharedInstance
+        store.firebaseFCMID = fcmToken
     }
     // [END refresh_token]
     // [START ios_10_data_message]

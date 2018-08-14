@@ -11,9 +11,11 @@ import WebKit
 
 // MARK: - Call app names
 let CALL_APP_QRCODE             = "callQrcode"
+let CALL_APP_FCM                = "FCMID"
 
 // MARK: - Call script names
-let CALL_SCRIPT_QRCode          = "onQrcodeRead"
+let CALL_SCRIPT_QRCODE          = "onQrcodeRead"
+let CALL_SCRIPT_FCM             = "getFcmId"
 
 class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, QRCodeViewControllerDelegate {
     
@@ -56,7 +58,8 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKSc
         }
         
         // JS -> Native Application
-        webView.configuration.userContentController.add(self, name: "callQrcode")
+        webView.configuration.userContentController.add(self, name: CALL_APP_QRCODE)
+        webView.configuration.userContentController.add(self, name: CALL_APP_FCM)
         
         // TODO: Test용 나중에 지워야 함
         WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { (records) in
@@ -85,15 +88,22 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKSc
 
     // MARK: - WKScriptMessageHandler
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if message.name == "callQrcode" {
+        switch message.name {
+        case CALL_APP_QRCODE:
             self.performSegue(withIdentifier: "showQRCodeView", sender: self)
+        case CALL_APP_FCM:
+            webView.evaluateJavaScript("\(CALL_SCRIPT_FCM)('\(HDMCStore.sharedInstance.firebaseFCMID)')") { (result, error) in
+                
+            }
+        default:
+            break
         }
     }
     
     // MARK: - QRCodeViewControllerDelegate
     func sendURL(url: URL) {
-        webView.evaluateJavaScript("\(CALL_SCRIPT_QRCode)('\(url.absoluteString)')") { (result, error) in
-            print(url.absoluteString)
+        webView.evaluateJavaScript("\(CALL_SCRIPT_QRCODE)('\(url.absoluteString)')") { (result, error) in
+            
         }
     }
 
