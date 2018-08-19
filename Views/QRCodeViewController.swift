@@ -15,10 +15,15 @@ protocol QRCodeViewControllerDelegate {
 
 class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UsingThread {
     
+    // UI Components (_Member Variable)
+    var scanStatusLabel: UILabel?
+    
+    // Member Variable
     var captureSession:AVCaptureSession?
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
     let systemSoundId : SystemSoundID = 1016
     var delegate: QRCodeViewControllerDelegate?
+    var checkDuplicateArray: Array<String>?
     
     override func viewDidDisappear(_ animated: Bool) {
         captureSession?.stopRunning()
@@ -30,6 +35,9 @@ class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Initialize array
+        checkDuplicateArray = Array<String>()
         
         //AVCaptureDevice allows us to reference a physical capture device (video in our case)
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
@@ -45,6 +53,17 @@ class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                 
                 // CaptureSession needs and output to transfer Data to
                 let captureMetadataOutput = AVCaptureMetadataOutput()
+                // frame setting
+                let value: CGFloat = view.frame.size.width/2
+                let x: CGFloat = 0.25
+                let y: CGFloat = (1 - value / view.frame.width) / 2
+                let width: CGFloat = 0.5
+                let height: CGFloat = value / view.frame.size.height
+                
+                captureMetadataOutput.rectOfInterest = CGRect(x: y,
+                                                              y: 1 - x - width,
+                                                              width: height,
+                                                              height: width)
                 captureSession?.addOutput(captureMetadataOutput)
                 
                 //We tell our Output the expected Meta-data type
@@ -58,6 +77,37 @@ class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                 videoPreviewLayer?.videoGravity = .resizeAspectFill
                 videoPreviewLayer?.frame = view.layer.bounds
                 view.layer.addSublayer(videoPreviewLayer!)
+                
+                // The QRCode capture frame
+                let maskLayer = CAShapeLayer()
+                maskLayer.fillRule = kCAFillRuleEvenOdd
+                maskLayer.frame = view.frame
+                
+                let maskLayerPath = UIBezierPath()
+                maskLayerPath.append(UIBezierPath(rect: maskLayer.frame))
+                let maskFrame = CGRect(x: view.frame.size.width * x,
+                                       y: view.frame.size.height * y,
+                                       width: view.frame.size.width * width,
+                                       height: view.frame.size.height * height)
+                maskLayerPath.append(UIBezierPath(roundedRect: maskFrame, cornerRadius: 10))
+                maskLayer.path = maskLayerPath.cgPath
+                
+                let imageLayer = CALayer()
+                imageLayer.frame =  view.frame
+                imageLayer.backgroundColor = UIColor(white: 0, alpha: 0.6).cgColor
+                imageLayer.mask = maskLayer
+                view.layer.addSublayer(imageLayer)
+                
+                // QRCode scanning status
+                scanStatusLabel = UILabel(frame: CGRect(x: 15,
+                                                        y: maskFrame.origin.y + maskFrame.size.height + 30,
+                                                        width: view.frame.size.width - 30,
+                                                        height: 40))
+                scanStatusLabel?.font = UIFont.systemFont(ofSize: 20)
+                scanStatusLabel?.textAlignment = .center
+                scanStatusLabel?.textColor = .white
+                scanStatusLabel?.text = "스캔 준비가 완료되었어요."
+                view.addSubview(scanStatusLabel!)
             }
             catch {
                 print("CaptureSession Error")
@@ -103,14 +153,21 @@ class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                 return
             }
             
-            //transformedMetaDataObject returns layer coordinates/height/width from visual properties
-            guard let _ = self.videoPreviewLayer?.transformedMetadataObject(for: metaDataObject) else {
-                return
-            }
+            if let url = URL(string: StringCodeValue),
+                let host = url.host {
+                if (self.checkDuplicateArray?.contains(host))! {
+                    return
+                }
+                
+                //transformedMetaDataObject returns layer coordinates/height/width from visual properties
+                guard let _ = self.videoPreviewLayer?.transformedMetadataObject(for: metaDataObject) else {
+                    return
+                }
             
-            AudioServicesPlayAlertSound(self.systemSoundId)
+                AudioServicesPlayAlertSound(self.systemSoundId)
             
-            if let url = URL(string: StringCodeValue) {
+                self.checkDuplicateArray?.append(host)
+                self.scanStatusLabel?.text = "'\(host)'원생 확인완료"
                 self.delegate?.sendURL(url: url)
             }
         }
