@@ -11,9 +11,11 @@ import WebKit
 
 // MARK: - Call app names
 let CALL_APP_QRCODE             = "callQrcode"
+let CALL_APP_FCM                = "FCMID"
 
 // MARK: - Call script names
-let CALL_SCRIPT_QRCode          = "onQrcodeRead"
+let CALL_SCRIPT_QRCODE          = "onQrcodeRead"
+let CALL_SCRIPT_FCM             = "getFcmId"
 
 class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, QRCodeViewControllerDelegate {
     
@@ -56,7 +58,8 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKSc
         }
         
         // JS -> Native Application
-        webView.configuration.userContentController.add(self, name: "callQrcode")
+        webView.configuration.userContentController.add(self, name: CALL_APP_QRCODE)
+        webView.configuration.userContentController.add(self, name: CALL_APP_FCM)
         
         // TODO: Test용 나중에 지워야 함
         WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { (records) in
@@ -70,7 +73,24 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKSc
         // 초기 url 삽입
         webView.load(URLRequest(url: URL(string: "https://howdoesmychild.firebaseapp.com")!))
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // iOS 12 ~
+        // WKWebView에서 TextField를 눌러 키보드가 올라오면
+        // constraint가 깨져서 WKWebView 프레임이 깨져 제대로 눌리지 않는 이슈가 있음
+        // 그래서 키보드가 내려가기 바로 전에 WKWebView를 스크롤 최 상단으로 올리도록 수정함
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc
+    func keyboardWillHide(_ notification:NSNotification) {
+        webView.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -85,15 +105,23 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKSc
 
     // MARK: - WKScriptMessageHandler
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if message.name == "callQrcode" {
+        switch message.name {
+        case CALL_APP_QRCODE:
             self.performSegue(withIdentifier: "showQRCodeView", sender: self)
+        case CALL_APP_FCM:
+            webView.evaluateJavaScript("\(CALL_SCRIPT_FCM)('\(HDMCStore.sharedInstance.firebaseFCMID)')") { (result, error) in
+                
+            }
+        default:
+            break
         }
     }
     
     // MARK: - QRCodeViewControllerDelegate
-    func sendURL(url: URL) {
-        webView.evaluateJavaScript("\(CALL_SCRIPT_QRCode)('\(url.absoluteString)')") { (result, error) in
-            print(url.absoluteString)
+    
+    func sendJson(json: String) {
+        webView.evaluateJavaScript("\(CALL_SCRIPT_QRCODE)('\(json)')") { (result, error) in
+            
         }
     }
 
