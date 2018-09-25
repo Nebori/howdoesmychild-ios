@@ -73,7 +73,24 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKSc
         // 초기 url 삽입
         webView.load(URLRequest(url: URL(string: "https://howdoesmychild.firebaseapp.com")!))
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // iOS 12 ~
+        // WKWebView에서 TextField를 눌러 키보드가 올라오면
+        // constraint가 깨져서 WKWebView 프레임이 깨져 제대로 눌리지 않는 이슈가 있음
+        // 그래서 키보드가 내려가기 바로 전에 WKWebView를 스크롤 최 상단으로 올리도록 수정함
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc
+    func keyboardWillHide(_ notification:NSNotification) {
+        webView.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -101,8 +118,9 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKSc
     }
     
     // MARK: - QRCodeViewControllerDelegate
-    func sendURL(url: URL) {
-        webView.evaluateJavaScript("\(CALL_SCRIPT_QRCODE)('\(url.absoluteString)')") { (result, error) in
+    
+    func sendJson(json: String) {
+        webView.evaluateJavaScript("\(CALL_SCRIPT_QRCODE)('\(json)')") { (result, error) in
             
         }
     }
