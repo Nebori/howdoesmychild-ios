@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 protocol QRCodeViewControllerDelegate {
-    func sendURL(url: URL)
+    func sendJson(json: String)
 }
 
 class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UsingThread {
@@ -23,9 +23,10 @@ class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
     let systemSoundId : SystemSoundID = 1016
     var delegate: QRCodeViewControllerDelegate?
-    var checkDuplicateArray: Array<String>?
+    var checkDuplicateArray: Array<String> = Array<String>()
     
     override func viewDidDisappear(_ animated: Bool) {
+        checkDuplicateArray = Array<String>()
         captureSession?.stopRunning()
     }
     
@@ -35,9 +36,6 @@ class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Initialize array
-        checkDuplicateArray = Array<String>()
         
         //AVCaptureDevice allows us to reference a physical capture device (video in our case)
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
@@ -68,7 +66,7 @@ class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                 
                 //We tell our Output the expected Meta-data type
                 captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-                captureMetadataOutput.metadataObjectTypes = [.code128, .qr, .ean13, .ean8, .code39, .upce, .aztec, .pdf417]
+                captureMetadataOutput.metadataObjectTypes = captureMetadataOutput.availableMetadataObjectTypes //[.code128, .qr, .ean13, .ean8, .code39, .upce, .aztec, .pdf417]
                 
                 captureSession?.startRunning()
                 
@@ -115,15 +113,20 @@ class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         }
         
         // Add button
-        let backButton: UIButton = UIButton(frame:
-            CGRect(
-                x: view.frame.width / 3,
-                y: view.frame.height - (view.frame.height / 8),
-                width: view.frame.width / 3,
-                height: 100)
-        )
+        let buttonHeight: CGFloat = 40
+        let marginX: CGFloat = 15
+        let marginBottom: CGFloat = 30
+        let backButton: UIButton = UIButton(type: .roundedRect)
+        backButton.frame = CGRect(
+                                x: marginX,
+                                y: view.frame.height - buttonHeight - marginBottom,
+                                width: view.frame.width - (marginX * 2),
+                                height: buttonHeight)
         backButton.addTarget(self, action: #selector(closeViewController), for: .touchUpInside)
-        backButton.setTitle("Finish", for: .normal)
+        backButton.setTitle("닫기", for: .normal)
+        backButton.setTitleColor(UIColor.white, for: .normal)
+        backButton.backgroundColor = UIColor.init(red: 251/255.0, green: 193/255.0, blue: 44/255.0, alpha: 1.0)
+        backButton.layer.cornerRadius = 3
         view.addSubview(backButton)
     }
     
@@ -148,27 +151,25 @@ class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                 return
             }
             
-            let metaDataObject = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
-            guard let StringCodeValue = metaDataObject.stringValue else {
+            let metaDataObject = metadataObjects[0] as? AVMetadataMachineReadableCodeObject
+            guard let stringCodeValue = metaDataObject?.stringValue else {
                 return
             }
             
-            if let url = URL(string: StringCodeValue),
-                let host = url.host {
-                if (self.checkDuplicateArray?.contains(host))! {
+            let jsonData = stringCodeValue.data(using: .utf8)
+            do {
+                let jsonParser = try JSONDecoder().decode(HDMCStudentInfo.self, from: jsonData!)
+                if self.checkDuplicateArray.contains(jsonParser.name) {
                     return
                 }
-                
-                //transformedMetaDataObject returns layer coordinates/height/width from visual properties
-                guard let _ = self.videoPreviewLayer?.transformedMetadataObject(for: metaDataObject) else {
-                    return
+                if jsonParser.verify == "howdoesmychild" {
+                    AudioServicesPlayAlertSound(self.systemSoundId)
+                    self.checkDuplicateArray.append(jsonParser.name)
+                    self.scanStatusLabel?.text = "'\(jsonParser.name)' 원생 등원확인"
+                    self.delegate?.sendJson(json: stringCodeValue)
                 }
-            
-                AudioServicesPlayAlertSound(self.systemSoundId)
-            
-                self.checkDuplicateArray?.append(host)
-                self.scanStatusLabel?.text = "'\(host)'원생 확인완료"
-                self.delegate?.sendURL(url: url)
+            } catch {
+                self.scanStatusLabel?.text = "정보를 제대로 읽지 못했습니다."
             }
         }
     }
