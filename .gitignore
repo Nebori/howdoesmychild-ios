@@ -1,2 +1,6 @@
 # configure file
 *.cnf
+
+# Pod file
+*.xcworkspace
+Pods/*

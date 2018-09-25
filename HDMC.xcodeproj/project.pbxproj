@@ -7,12 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F4C72EB142014BEF6BCBD89 /* Pods_HDMCTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6F72BE58D4DE42CA5C667C4 /* Pods_HDMCTests.framework */; };
+		5CE55A5A040F62368FD24CDE /* Pods_HDMC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD538D7BB8291E1C7D58816 /* Pods_HDMC.framework */; };
+		952C73F0214F3C2C00828C05 /* HDMCStudentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952C73EF214F3C2C00828C05 /* HDMCStudentInfo.swift */; };
+		956306FC212128D70020F68B /* HDMCStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956306FB212128D70020F68B /* HDMCStore.swift */; };
+		956A26ED214206AF002B3834 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 956A26EC214206AE002B3834 /* AVFoundation.framework */; };
 		956F8E102119C27000CBBBBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F8E0F2119C27000CBBBBD /* AppDelegate.swift */; };
 		956F8E122119C27000CBBBBD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F8E112119C27000CBBBBD /* ViewController.swift */; };
 		956F8E152119C27000CBBBBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 956F8E132119C27000CBBBBD /* Main.storyboard */; };
 		956F8E172119C27100CBBBBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 956F8E162119C27100CBBBBD /* Assets.xcassets */; };
 		956F8E1A2119C27100CBBBBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 956F8E182119C27100CBBBBD /* LaunchScreen.storyboard */; };
 		956F8E252119C27100CBBBBD /* HDMCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F8E242119C27100CBBBBD /* HDMCTests.swift */; };
+		956F8E342119CE3200CBBBBD /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F8E332119CE3200CBBBBD /* QRCodeViewController.swift */; };
+		95F2B200211A9EB500859F7C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95F2B1FF211A9EB500859F7C /* GoogleService-Info.plist */; };
+		95F2B2032120723300859F7C /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F2B2022120723300859F7C /* Thread.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +34,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0CD538D7BB8291E1C7D58816 /* Pods_HDMC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HDMC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C332FE9DBFF8E1DA15053AA /* Pods-HDMC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HDMC.release.xcconfig"; path = "Pods/Target Support Files/Pods-HDMC/Pods-HDMC.release.xcconfig"; sourceTree = "<group>"; };
+		80370C48A4C2EE52D38910C3 /* Pods-HDMC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HDMC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HDMC/Pods-HDMC.debug.xcconfig"; sourceTree = "<group>"; };
+		952C73EF214F3C2C00828C05 /* HDMCStudentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDMCStudentInfo.swift; sourceTree = "<group>"; };
+		956306FB212128D70020F68B /* HDMCStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDMCStore.swift; sourceTree = "<group>"; };
+		956A26EC214206AE002B3834 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		956F8E0C2119C27000CBBBBD /* HDMC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HDMC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		956F8E0F2119C27000CBBBBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		956F8E112119C27000CBBBBD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +50,13 @@
 		956F8E202119C27100CBBBBD /* HDMCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HDMCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		956F8E242119C27100CBBBBD /* HDMCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDMCTests.swift; sourceTree = "<group>"; };
 		956F8E262119C27100CBBBBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		956F8E332119CE3200CBBBBD /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
+		95F2B1FF211A9EB500859F7C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Swift_Configure/HDMC/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		95F2B201211AA4F600859F7C /* HDMC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HDMC.entitlements; sourceTree = "<group>"; };
+		95F2B2022120723300859F7C /* Thread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
+		A1B95FEB1C1204DFD0121AB8 /* Pods-HDMCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HDMCTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HDMCTests/Pods-HDMCTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A6F72BE58D4DE42CA5C667C4 /* Pods_HDMCTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HDMCTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEA511BAEE1BFD923023568D /* Pods-HDMCTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HDMCTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HDMCTests/Pods-HDMCTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +64,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				956A26ED214206AF002B3834 /* AVFoundation.framework in Frameworks */,
+				5CE55A5A040F62368FD24CDE /* Pods_HDMC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,12 +73,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F4C72EB142014BEF6BCBD89 /* Pods_HDMCTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D91573F552257FB4B5D3EC2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				80370C48A4C2EE52D38910C3 /* Pods-HDMC.debug.xcconfig */,
+				3C332FE9DBFF8E1DA15053AA /* Pods-HDMC.release.xcconfig */,
+				A1B95FEB1C1204DFD0121AB8 /* Pods-HDMCTests.debug.xcconfig */,
+				DEA511BAEE1BFD923023568D /* Pods-HDMCTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		956F8E032119C27000CBBBBD = {
 			isa = PBXGroup;
 			children = (
@@ -64,7 +99,9 @@
 				956F8E312119C2FA00CBBBBD /* Models */,
 				956F8E0D2119C27000CBBBBD /* Products */,
 				956F8E2F2119C2EA00CBBBBD /* Protocols */,
+				3D91573F552257FB4B5D3EC2 /* Pods */,
 				956F8E302119C2F200CBBBBD /* Views */,
+				B34CC53BA66B76DE2F8546EA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,6 +117,8 @@
 		956F8E0E2119C27000CBBBBD /* HDMC */ = {
 			isa = PBXGroup;
 			children = (
+				95F2B201211AA4F600859F7C /* HDMC.entitlements */,
+				95F2B1FF211A9EB500859F7C /* GoogleService-Info.plist */,
 				956F8E0F2119C27000CBBBBD /* AppDelegate.swift */,
 				956F8E112119C27000CBBBBD /* ViewController.swift */,
 				956F8E132119C27000CBBBBD /* Main.storyboard */,
@@ -102,6 +141,7 @@
 		956F8E2F2119C2EA00CBBBBD /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				95F2B2022120723300859F7C /* Thread.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -109,6 +149,7 @@
 		956F8E302119C2F200CBBBBD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				956F8E332119CE3200CBBBBD /* QRCodeViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -116,8 +157,20 @@
 		956F8E312119C2FA00CBBBBD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				956306FB212128D70020F68B /* HDMCStore.swift */,
+				952C73EF214F3C2C00828C05 /* HDMCStudentInfo.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B34CC53BA66B76DE2F8546EA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				956A26EC214206AE002B3834 /* AVFoundation.framework */,
+				0CD538D7BB8291E1C7D58816 /* Pods_HDMC.framework */,
+				A6F72BE58D4DE42CA5C667C4 /* Pods_HDMCTests.framework */,
+			);
+			path = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,9 +180,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 956F8E292119C27100CBBBBD /* Build configuration list for PBXNativeTarget "HDMC" */;
 			buildPhases = (
+				DAD3E28F0DBDFE3DB1D70206 /* [CP] Check Pods Manifest.lock */,
 				956F8E082119C27000CBBBBD /* Sources */,
 				956F8E092119C27000CBBBBD /* Frameworks */,
 				956F8E0A2119C27000CBBBBD /* Resources */,
+				34684B46A01122364C1C5B2A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -144,6 +199,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 956F8E2C2119C27100CBBBBD /* Build configuration list for PBXNativeTarget "HDMCTests" */;
 			buildPhases = (
+				936960E1B18E1B83AEBF1A93 /* [CP] Check Pods Manifest.lock */,
 				956F8E1C2119C27100CBBBBD /* Sources */,
 				956F8E1D2119C27100CBBBBD /* Frameworks */,
 				956F8E1E2119C27100CBBBBD /* Resources */,
@@ -170,6 +226,11 @@
 				TargetAttributes = {
 					956F8E0B2119C27000CBBBBD = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					956F8E1F2119C27100CBBBBD = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -202,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				956F8E1A2119C27100CBBBBD /* LaunchScreen.storyboard in Resources */,
+				95F2B200211A9EB500859F7C /* GoogleService-Info.plist in Resources */,
 				956F8E172119C27100CBBBBD /* Assets.xcassets in Resources */,
 				956F8E152119C27000CBBBBD /* Main.storyboard in Resources */,
 			);
@@ -216,13 +278,78 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		34684B46A01122364C1C5B2A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-HDMC/Pods-HDMC-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HDMC/Pods-HDMC-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		936960E1B18E1B83AEBF1A93 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HDMCTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DAD3E28F0DBDFE3DB1D70206 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HDMC-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		956F8E082119C27000CBBBBD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				956F8E342119CE3200CBBBBD /* QRCodeViewController.swift in Sources */,
+				952C73F0214F3C2C00828C05 /* HDMCStudentInfo.swift in Sources */,
 				956F8E122119C27000CBBBBD /* ViewController.swift in Sources */,
 				956F8E102119C27000CBBBBD /* AppDelegate.swift in Sources */,
+				95F2B2032120723300859F7C /* Thread.swift in Sources */,
+				956306FC212128D70020F68B /* HDMCStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,10 +507,17 @@
 		};
 		956F8E2A2119C27100CBBBBD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 80370C48A4C2EE52D38910C3 /* Pods-HDMC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HDMC/HDMC.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HR25439TCX;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = HDMC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -392,6 +526,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lkk.HDMC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -399,10 +534,17 @@
 		};
 		956F8E2B2119C27100CBBBBD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C332FE9DBFF8E1DA15053AA /* Pods-HDMC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HDMC/HDMC.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HR25439TCX;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = HDMC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -411,6 +553,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lkk.HDMC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -418,6 +561,7 @@
 		};
 		956F8E2D2119C27100CBBBBD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A1B95FEB1C1204DFD0121AB8 /* Pods-HDMCTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -439,6 +583,7 @@
 		};
 		956F8E2E2119C27100CBBBBD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DEA511BAEE1BFD923023568D /* Pods-HDMCTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
